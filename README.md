@@ -10,12 +10,12 @@ Bu proje, Türkiye'deki depremleri harita üzerinde görselleştiren bir web uyg
 ## Kurulum Adımları
 
 ### 1. Projeyi İndirme
-git clone https://github.com/kullaniciadin/deprem-haritasi.git
+-git clone https://github.com/kullaniciadin/deprem-haritasi.git
 ### 2. Portainer Kurulumu ve SQL Server Container Oluşturma
 
 1. Portainer'ı kurun ve başlatın:
-docker volume create portainer_data
-docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+-docker volume create portainer_data
+-docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 
 2. Portainer'a erişin:
    - https://localhost:9443 adresine gidin
