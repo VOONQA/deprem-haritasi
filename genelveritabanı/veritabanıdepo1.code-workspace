@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "veritabanıdepo",
+			"path": "../veritabanıdepo"
+		},
+		{
+			"name": "depremapi",
+			"path": "../depremapi"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Türkiye Deprem Haritası</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="../src/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="button-container">
+                <button class="map-button active" onclick="showCurrent()">GÜNCEL</button>
+                <button class="map-button" onclick="show2023()">2023</button>
+                <button class="map-button" onclick="show2022()">2022</button>
+                <button class="map-button" onclick="show2021()">2021</button>
+                <button class="map-button" onclick="show2020()">2020</button>
+            </div>
+            <div class="map-type-container">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round">
+                            <span class="sun">☀️</span>
+                            <span class="moon">🌙</span>
+                        </div>
+                    </label>
+                </div>
+                <button class="map-type-button active" onclick="changeMapType('streets')">Sokak</button>
+                <button class="map-type-button" onclick="changeMapType('satellite')">Uydu</button>
+                <button class="map-type-button" onclick="changeMapType('terrain')">Arazi</button>
+            </div>
+            <div class="legend-container">
+                <div class="legend-box">
+                    <h4>Deprem Büyüklükleri</h4>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #FF0000"></span>
+                        <span class="legend-text">7.0 ve üzeri</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #FF4500"></span>
+                        <span class="legend-text">6.0 - 6.9</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #FFA500"></span>
+                        <span class="legend-text">5.0 - 5.9</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #FFD700"></span>
+                        <span class="legend-text">4.0 - 4.9</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #90EE90"></span>
+                        <span class="legend-text">3.0 - 3.9</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #98FB98"></span>
+                        <span class="legend-text">2.5 - 2.9</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-panels">
+            <div class="panel recent-earthquakes">
+                <h2>Son Depremler</h2>
+                <div class="earthquake-list" id="recentEarthquakes">
+                    <!-- Burası JavaScript ile doldurulacak -->
+                </div>
+            </div>
+            <div class="panel major-earthquakes">
+                <h2>Son Büyük Depremler</h2>
+                <div class="earthquake-list" id="majorEarthquakes">
+                    <!-- Burası JavaScript ile doldurulacak -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Diğer kodlar... -->
+    <script type="module" src="../src/scripts/map.js"></script>
+    <script type="module" src="../src/scripts/panel.js"></script>
+</body>
+</html>

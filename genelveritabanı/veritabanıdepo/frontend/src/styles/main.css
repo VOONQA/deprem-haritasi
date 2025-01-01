@@ -1,0 +1,376 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    height: 100vh;
+}
+
+.map-container {
+    width: 75%;
+    height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.info-panels {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.panel {
+    flex: 1;
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.panel h2 {
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+.earthquake-list {
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+/* Webkit (Chrome, Safari) için scrollbar stilini özelleştirme */
+.earthquake-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.earthquake-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.earthquake-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.earthquake-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Buton Stilleri */
+.button-container {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+}
+
+.map-button {
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.map-button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.map-button.active {
+    background-color: #2196F3;
+    color: white;
+}
+.popup-content {
+    padding: 10px;
+}
+
+.popup-content h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.popup-content p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.popup-content strong {
+    color: #666;
+}
+
+.earthquake-item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    line-height: 1.4;
+}
+
+.magnitude {
+    background: #ff5722;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 8px;
+}
+
+.location {
+    font-weight: 500;
+}
+
+.earthquake-details {
+    color: #666;
+    font-size: 13px;
+    margin-top: 3px;
+}
+.legend-container {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.legend-box {
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-size: 12px;
+    min-width: 150px;
+}
+
+.legend-box h4 {
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.legend-text {
+    color: #333;
+}
+
+.map-type-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.map-type-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.map-type-button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.map-type-button:hover {
+    background-color: #ddd;
+}
+
+.map-type-button.active:hover {
+    background-color: #45a049;
+}
+
+.map-type-container {
+    position: absolute;
+    top: 10px;
+    right: 26%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: auto;
+}
+
+.map-type-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    white-space: nowrap;
+}
+
+.map-type-button.active {
+    background-color: #2196F3;
+    color: white;
+}
+
+.map-type-button:hover {
+    background-color: #f0f0f0;
+    transform: translateX(-2px);
+}
+
+.map-type-button.active:hover {
+    background-color: #1976D2;
+}
+
+/* Tema değişkenleri */
+:root {
+    --panel-bg: #f5f5f5;
+    --panel-box-bg: white;
+    --text-color: #333;
+    --border-color: #eee;
+}
+
+[data-theme="dark"] {
+    --panel-bg: #1a1a1a;
+    --panel-box-bg: #2d2d2d;
+    --text-color: #fff;
+    --border-color: #404040;
+}
+
+/* Tema geçiş animasyonu */
+.info-panels, .panel, .panel h2, .earthquake-item {
+    transition: all 0.3s ease;
+}
+
+/* Tema switch stilleri */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 36px;
+    position: relative;
+    width: 68px;
+    vertical-align: middle;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 28px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 28px;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+    transform: translateX(32px);
+}
+
+.slider .sun, .slider .moon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    transition: opacity 0.3s ease;
+}
+
+.slider .sun {
+    left: 6px;
+    opacity: 1;
+}
+
+.slider .moon {
+    right: 6px;
+    opacity: 0;
+}
+
+input:checked + .slider .sun {
+    opacity: 0;
+}
+
+input:checked + .slider .moon {
+    opacity: 1;
+}
+
+/* Panel stillerini tema değişkenlerine göre güncelle */
+.info-panels {
+    background-color: var(--panel-bg);
+}
+
+.panel {
+    background: var(--panel-box-bg);
+}
+
+.panel h2 {
+    color: var(--text-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.earthquake-item {
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
